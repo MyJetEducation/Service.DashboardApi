@@ -1,4 +1,6 @@
 ﻿using Autofac;
+using Service.Core.Client.Services;
+using Service.DashboardApi.Services;
 using Service.EducationProgress.Client;
 using Service.EducationRetry.Client;
 using Service.UserInfo.Crud.Client;
@@ -16,6 +18,9 @@ namespace Service.DashboardApi.Modules
             builder.RegisterUserProgressClient(Program.Settings.UserProgressServiceUrl);
             builder.RegisterUserRewardClient(Program.Settings.UserRewardServiceUrl);
             builder.RegisterEducationRetryClient(Program.Settings.EducationRetryServiceUrl);
+
+	        builder.RegisterType<RetryTaskService>().AsImplementedInterfaces().SingleInstance();
+	        builder.RegisterType<SystemClock>().AsImplementedInterfaces().SingleInstance();
         }
     }
 }
