@@ -4,15 +4,16 @@ using Service.Core.Client.Services;
 using Service.Education.Structure;
 using Service.EducationRetry.Grpc;
 using Service.EducationRetry.Grpc.Models;
+using Service.Grpc;
 
 namespace Service.DashboardApi.Services
 {
 	public class RetryTaskService : IRetryTaskService
 	{
-		private readonly IEducationRetryService _retryService;
+		private readonly IGrpcServiceProxy<IEducationRetryService> _retryService;
 		private readonly ISystemClock _systemClock;
 
-		public RetryTaskService(IEducationRetryService retryService, ISystemClock systemClock)
+		public RetryTaskService(IGrpcServiceProxy<IEducationRetryService> retryService, ISystemClock systemClock)
 		{
 			_retryService = retryService;
 			_systemClock = systemClock;
@@ -20,7 +21,7 @@ namespace Service.DashboardApi.Services
 
 		public async ValueTask<bool> TaskInRetryStateAsync(Guid? userId, int unit, int task)
 		{
-			TaskRetryStateGrpcResponse response = await _retryService.GetTaskRetryStateAsync(new GetTaskRetryStateGrpcRequest
+			TaskRetryStateGrpcResponse response = await _retryService.Service.GetTaskRetryStateAsync(new GetTaskRetryStateGrpcRequest
 			{
 				UserId = userId,
 				Tutorial = EducationTutorial.PersonalFinance,
@@ -36,7 +37,7 @@ namespace Service.DashboardApi.Services
 			if (progressDate == null || !OneDayGone(progressDate.Value))
 				return false;
 
-			RetryLastDateGrpcResponse response = await _retryService.GetRetryLastDateAsync(new GetRetryLastDateGrpcRequest
+			RetryLastDateGrpcResponse response = await _retryService.Service.GetRetryLastDateAsync(new GetRetryLastDateGrpcRequest
 			{
 				UserId = userId
 			});
@@ -48,7 +49,7 @@ namespace Service.DashboardApi.Services
 
 		public async ValueTask<bool> HasRetryCountAsync(Guid? userId)
 		{
-			RetryCountGrpcResponse retryResponse = await _retryService.GetRetryCountAsync(new GetRetryCountGrpcRequest
+			RetryCountGrpcResponse retryResponse = await _retryService.Service.GetRetryCountAsync(new GetRetryCountGrpcRequest
 			{
 				UserId = userId
 			});
