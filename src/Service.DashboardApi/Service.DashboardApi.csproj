@@ -24,11 +24,12 @@
     <PackageReference Include="SimpleTrading.Common" Version="1.0.32" />
     <PackageReference Include="NSwag.AspNetCore" Version="13.15.9" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.2" />
-    <PackageReference Include="MyJetEducation.Service.UserInfo.Crud.Client" Version="1.0.14" />
+    <PackageReference Include="MyJetEducation.Service.UserInfo.Crud.Client" Version="1.0.15" />
     <PackageReference Include="MyJetEducation.Service.EducationProgress.Client" Version="1.0.20" />
     <PackageReference Include="MyJetEducation.Service.UserProgress.Client" Version="1.0.11" />
     <PackageReference Include="MyJetEducation.Service.UserReward.Client" Version="1.0.6" />
-    <PackageReference Include="MyJetEducation.Service.EducationRetry.Client" Version="1.0.5" />
+    <PackageReference Include="MyJetEducation.Service.EducationRetry.Client" Version="1.0.6" />
+    <PackageReference Include="MyJetEducation.Service.Grpc" Version="1.0.3" />
   </ItemGroup>
 
   <ItemGroup>

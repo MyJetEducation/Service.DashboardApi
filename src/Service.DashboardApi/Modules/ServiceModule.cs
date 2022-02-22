@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Microsoft.Extensions.Logging;
 using Service.Core.Client.Services;
 using Service.DashboardApi.Services;
 using Service.EducationProgress.Client;
@@ -13,13 +14,14 @@ namespace Service.DashboardApi.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterUserInfoCrudClient(Program.Settings.UserInfoCrudServiceUrl);
+	        builder.RegisterUserInfoCrudClient(Program.Settings.UserInfoCrudServiceUrl, Program.LogFactory.CreateLogger(typeof(UserInfoCrudClientFactory)));
+            builder.RegisterEducationRetryClient(Program.Settings.EducationRetryServiceUrl, Program.LogFactory.CreateLogger(typeof(EducationRetryClientFactory)));
+
             builder.RegisterEducationProgressClient(Program.Settings.EducationProgressServiceUrl);
             builder.RegisterUserProgressClient(Program.Settings.UserProgressServiceUrl);
             builder.RegisterUserRewardClient(Program.Settings.UserRewardServiceUrl);
-            builder.RegisterEducationRetryClient(Program.Settings.EducationRetryServiceUrl);
 
-	        builder.RegisterType<RetryTaskService>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<RetryTaskService>().AsImplementedInterfaces().SingleInstance();
 	        builder.RegisterType<SystemClock>().AsImplementedInterfaces().SingleInstance();
         }
     }

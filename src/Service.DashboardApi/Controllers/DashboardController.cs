@@ -12,6 +12,7 @@ using Service.DashboardApi.Services;
 using Service.Education.Extensions;
 using Service.EducationProgress.Grpc;
 using Service.EducationProgress.Grpc.Models;
+using Service.Grpc;
 using Service.UserInfo.Crud.Grpc;
 using Service.UserInfo.Crud.Grpc.Models;
 using Service.UserProgress.Grpc;
@@ -29,13 +30,13 @@ namespace Service.DashboardApi.Controllers
 	[Route("/api/v1/education/dashboard")]
 	public class DashboardController : ControllerBase
 	{
-		private readonly IUserInfoService _userInfoService;
+		private readonly IGrpcServiceProxy<IUserInfoService> _userInfoService;
 		private readonly IEducationProgressService _educationProgressService;
 		private readonly IUserProgressService _userProgressService;
 		private readonly IUserRewardService _userRewardService;
 		private readonly IRetryTaskService _retryTaskService;
 
-		public DashboardController(IUserInfoService userInfoService,
+		public DashboardController(IGrpcServiceProxy<IUserInfoService> userInfoService,
 			IEducationProgressService progressService,
 			IUserProgressService userProgressService,
 			IUserRewardService userRewardService,
@@ -123,7 +124,7 @@ namespace Service.DashboardApi.Controllers
 
 		protected async ValueTask<Guid?> GetUserIdAsync()
 		{
-			UserInfoResponse userInfoResponse = await _userInfoService.GetUserInfoByLoginAsync(new UserInfoAuthRequest
+			UserInfoResponse userInfoResponse = await _userInfoService.Service.GetUserInfoByLoginAsync(new UserInfoAuthRequest
 			{
 				UserName = User.Identity?.Name
 			});
