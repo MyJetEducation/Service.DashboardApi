@@ -4,7 +4,6 @@ using Service.Core.Client.Services;
 using Service.DashboardApi.Services;
 using Service.EducationProgress.Client;
 using Service.EducationRetry.Client;
-using Service.UserInfo.Crud.Client;
 using Service.UserProgress.Client;
 using Service.UserReward.Client;
 
@@ -14,7 +13,6 @@ namespace Service.DashboardApi.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-	        builder.RegisterUserInfoCrudClient(Program.Settings.UserInfoCrudServiceUrl, Program.LogFactory.CreateLogger(typeof(UserInfoCrudClientFactory)));
             builder.RegisterEducationRetryClient(Program.Settings.EducationRetryServiceUrl, Program.LogFactory.CreateLogger(typeof(EducationRetryClientFactory)));
 
             builder.RegisterEducationProgressClient(Program.Settings.EducationProgressServiceUrl);

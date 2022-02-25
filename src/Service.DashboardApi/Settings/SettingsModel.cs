@@ -17,9 +17,6 @@ namespace Service.DashboardApi.Settings
 		[YamlProperty("DashboardApi.JwtAudience")]
 		public string JwtAudience { get; set; }
 
-		[YamlProperty("DashboardApi.UserInfoCrudServiceUrl")]
-		public string UserInfoCrudServiceUrl { get; set; }
-
 		[YamlProperty("DashboardApi.EducationProgressServiceUrl")]
 		public string EducationProgressServiceUrl { get; set; }
 
