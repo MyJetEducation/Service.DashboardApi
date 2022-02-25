@@ -12,7 +12,6 @@ using Service.DashboardApi.Services;
 using Service.Education.Extensions;
 using Service.EducationProgress.Grpc;
 using Service.EducationProgress.Grpc.Models;
-using Service.UserInfo.Crud.Grpc.Models;
 using Service.UserProgress.Grpc;
 using Service.UserProgress.Grpc.Models;
 using Service.UserReward.Grpc;
