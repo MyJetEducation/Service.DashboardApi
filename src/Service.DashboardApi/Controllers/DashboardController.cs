@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
-using Service.Core.Client.Constants;
 using Service.DashboardApi.Mappers;
 using Service.DashboardApi.Models;
 using Service.DashboardApi.Services;
@@ -16,6 +15,8 @@ using Service.UserProgress.Grpc;
 using Service.UserProgress.Grpc.Models;
 using Service.UserReward.Grpc;
 using Service.UserReward.Grpc.Models;
+using Service.Web;
+using ResponseCode = Service.Core.Client.Constants.ResponseCode;
 
 namespace Service.DashboardApi.Controllers
 {
