@@ -103,19 +103,30 @@ namespace Service.DashboardApi.Controllers
 			if (userId == null)
 				return StatusResponse.Error(ResponseCode.UserNotFound);
 
-			EducationProgressGrpcResponse progress = await _educationProgressService.GetProgressAsync(new GetEducationProgressGrpcRequest {UserId = userId});
-			UnitedProgressGrpcResponse statsProgress = await _userProgressService.GetUnitedProgressAsync(new GetProgressGrpcRequset {UserId = userId});
+			EducationProgressGrpcResponse educationProgress = await _educationProgressService.GetProgressAsync(new GetEducationProgressGrpcRequest {UserId = userId});
+			UnitedProgressGrpcResponse userProgress = await _userProgressService.GetUnitedProgressAsync(new GetProgressGrpcRequset {UserId = userId});
 			UserAchievementsGrpcResponse achievements = await _userRewardService.GetUserAchievementsAsync(new GetUserAchievementsGrpcRequest {UserId = userId});
 
-			return DataResponse<ProgressResponse>.Ok(new ProgressResponse
+			var result = new ProgressResponse
 			{
-				TaskScore = (progress?.Value).GetValueOrDefault(),
-				Habit = statsProgress.Habit.ToModel(),
-				Skill = statsProgress.Skill.ToModel(),
 				Achievements = achievements?.Items
-			});
+			};
+
+			if (educationProgress != null)
+			{
+				result.TaskScore = educationProgress.Value;
+				result.Tasks = educationProgress.TasksPassed;
+			}
+
+			if (userProgress != null)
+			{
+				result.Habit = userProgress.Habit.ToModel();
+				result.Skill = userProgress.Skill.ToModel();
+			}
+
+			return DataResponse<ProgressResponse>.Ok(result);
 		}
 
-		protected Guid? GetUserId() => Guid.TryParse(User.Identity?.Name, out Guid uid) ? (Guid?)uid : null;
+		protected Guid? GetUserId() => Guid.TryParse(User.Identity?.Name, out Guid uid) ? (Guid?) uid : null;
 	}
 }
