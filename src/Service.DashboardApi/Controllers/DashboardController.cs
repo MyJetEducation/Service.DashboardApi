@@ -16,7 +16,6 @@ using Service.UserProgress.Grpc.Models;
 using Service.UserReward.Grpc;
 using Service.UserReward.Grpc.Models;
 using Service.Web;
-using ResponseCode = Service.Core.Client.Constants.ResponseCode;
 
 namespace Service.DashboardApi.Controllers
 {

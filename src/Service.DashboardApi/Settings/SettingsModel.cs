@@ -14,9 +14,6 @@ namespace Service.DashboardApi.Settings
 		[YamlProperty("DashboardApi.ElkLogs")]
 		public LogElkSettings ElkLogs { get; set; }
 
-		[YamlProperty("DashboardApi.JwtAudience")]
-		public string JwtAudience { get; set; }
-
 		[YamlProperty("DashboardApi.EducationProgressServiceUrl")]
 		public string EducationProgressServiceUrl { get; set; }
 
