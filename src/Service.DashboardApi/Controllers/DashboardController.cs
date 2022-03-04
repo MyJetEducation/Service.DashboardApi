@@ -9,6 +9,8 @@ using Service.DashboardApi.Mappers;
 using Service.DashboardApi.Models;
 using Service.DashboardApi.Services;
 using Service.Education.Extensions;
+using Service.Education.Helpers;
+using Service.Education.Structure;
 using Service.EducationProgress.Grpc;
 using Service.EducationProgress.Grpc.Models;
 using Service.UserProgress.Grpc;
@@ -79,9 +81,11 @@ namespace Service.DashboardApi.Controllers
 				foreach (TutorialProgressTaskModel task in unit.Tasks)
 				{
 					int progressValue = task.TaskScore;
-					bool lowProgress = !progressValue.IsMaxProgress();
+					EducationStructureTask structureTask = EducationHelper.GetTask(request.Tutorial, unit.Unit, task.Task);
+
+					bool acceptByProgress = task.HasProgress && (!progressValue.IsMaxProgress() || structureTask.TaskType == EducationTaskType.Game);
 					bool inRetryState = await _retryTaskService.TaskInRetryStateAsync(userId, unit.Unit, task.Task);
-					bool canRetryTask = !inRetryState && lowProgress;
+					bool canRetryTask = !inRetryState && acceptByProgress;
 
 					task.Retry = new RetryInfo
 					{
