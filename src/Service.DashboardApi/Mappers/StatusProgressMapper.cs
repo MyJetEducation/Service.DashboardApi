@@ -26,7 +26,7 @@ namespace Service.DashboardApi.Mappers
 
 		public static TutorialProgressTaskModel ToModel(this ShortTaskEducationProgressGrpcModel grpcModel) => new TutorialProgressTaskModel
 		{
-			TaskScore = grpcModel.TaskScore,
+			TaskScore = grpcModel.Value,
 			HasProgress = grpcModel.HasProgress,
 			Task = grpcModel.Task
 		};
