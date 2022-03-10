@@ -125,7 +125,7 @@ namespace Service.DashboardApi.Controllers
 			if (userProgress != null)
 			{
 				result.Habit = userProgress.Habit.ToModel();
-				result.Skill = userProgress.Skill.ToModel();
+				result.SkillProgress = userProgress.Skill.Total;
 			}
 
 			return DataResponse<ProgressResponse>.Ok(result);

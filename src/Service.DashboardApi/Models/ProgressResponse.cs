@@ -13,7 +13,8 @@ namespace Service.DashboardApi.Models
 
 		public StatusProgressModel Habit { get; set; }
 
-		public StatusProgressModel Skill { get; set; }
+		[Range(1, 100)]
+		public int SkillProgress { get; set; }
 
 		[EnumDataType(typeof(UserAchievement))]
 		public UserAchievement[] Achievements { get; set; }
