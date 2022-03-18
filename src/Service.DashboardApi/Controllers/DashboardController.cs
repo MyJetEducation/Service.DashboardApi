@@ -75,6 +75,9 @@ namespace Service.DashboardApi.Controllers
 				Tutorial = request.Tutorial
 			});
 
+			bool hasRetryCount = await _retryTaskService.HasRetryCountAsync(userId);
+			DateTime? lastRetryDate = await _retryTaskService.GetRetryLastDateAsync(userId);
+
 			TutorialProgressResponse tutorialProgressResponse = progressResponse.ToModel();
 			foreach (TutorialProgressUnitModel unit in tutorialProgressResponse.Units)
 			{
@@ -90,8 +93,8 @@ namespace Service.DashboardApi.Controllers
 					task.Retry = new RetryInfo
 					{
 						InRetry = inRetryState,
-						CanRetryByCount = canRetryTask && await _retryTaskService.HasRetryCountAsync(userId),
-						CanRetryByTime = canRetryTask && await _retryTaskService.CanRetryByTimeAsync(userId, task.Date)
+						CanRetryByCount = canRetryTask && hasRetryCount,
+						CanRetryByTime = canRetryTask && _retryTaskService.CanRetryByTimeAsync(task.Date, lastRetryDate)
 					};
 				}
 			}
