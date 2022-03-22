@@ -7,6 +7,9 @@ namespace Service.DashboardApi.Models
 	{
 		[Range(1, 100)]
 		public int TaskScore { get; set; }
+		
+		[Range(1, 100)]
+		public int TestScore { get; set; }
 
 		[Range(0, 270)]
 		public int Tasks { get; set; }

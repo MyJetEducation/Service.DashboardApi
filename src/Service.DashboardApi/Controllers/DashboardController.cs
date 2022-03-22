@@ -121,7 +121,8 @@ namespace Service.DashboardApi.Controllers
 
 			if (educationProgress != null)
 			{
-				result.TaskScore = educationProgress.TestScore;
+				result.TestScore = educationProgress.TestScore;
+				result.TaskScore = educationProgress.TaskScore;
 				result.Tasks = educationProgress.TasksPassed;
 			}
 
