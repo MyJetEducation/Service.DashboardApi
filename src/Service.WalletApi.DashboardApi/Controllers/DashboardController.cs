@@ -135,6 +135,13 @@ namespace Service.WalletApi.DashboardApi.Controllers
 			return DataResponse<ProgressResponse>.Ok(result);
 		}
 
-		protected Guid? GetUserId() => Guid.TryParse(User.Identity?.Name, out Guid uid) ? (Guid?) uid : null;
+		protected Guid? GetUserId()
+		{
+			string clientId = this.GetClientId();
+			if (clientId.IsNullOrWhiteSpace())
+				return null;
+
+			return Guid.TryParse(clientId, out Guid uid) ? (Guid?)uid : null;
+		}
 	}
 }
