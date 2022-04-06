@@ -5,40 +5,40 @@ namespace Service.WalletApi.DashboardApi.Settings
 {
 	public class SettingsModel
 	{
-		[YamlProperty("DashboardApi.SeqServiceUrl")]
+		[YamlProperty("WalletApiEducation.SeqServiceUrl")]
 		public string SeqServiceUrl { get; set; }
 
-		[YamlProperty("DashboardApi.ZipkinUrl")]
+		[YamlProperty("WalletApiEducation.ZipkinUrl")]
 		public string ZipkinUrl { get; set; }
 
-		[YamlProperty("DashboardApi.ElkLogs")]
+		[YamlProperty("WalletApiEducation.ElkLogs")]
 		public LogElkSettings ElkLogs { get; set; }
 
-		[YamlProperty("DashboardApi.EnableApiTrace")]
+		[YamlProperty("WalletApiEducation.EnableApiTrace")]
 		public bool EnableApiTrace { get; set; }
 
-		[YamlProperty("DashboardApi.MyNoSqlReaderHostPort")]
+		[YamlProperty("WalletApiEducation.MyNoSqlReaderHostPort")]
 		public string MyNoSqlReaderHostPort { get; set; }
 
-		[YamlProperty("DashboardApi.AuthMyNoSqlReaderHostPort")]
+		[YamlProperty("WalletApiEducation.AuthMyNoSqlReaderHostPort")]
 		public string AuthMyNoSqlReaderHostPort { get; set; }
 
-		[YamlProperty("DashboardApi.SessionEncryptionKeyId")]
+		[YamlProperty("WalletApiEducation.SessionEncryptionKeyId")]
 		public string SessionEncryptionKeyId { get; set; }
 
-		[YamlProperty("DashboardApi.MyNoSqlWriterUrl")]
+		[YamlProperty("WalletApiEducation.MyNoSqlWriterUrl")]
 		public string MyNoSqlWriterUrl { get; set; }
 
-		[YamlProperty("DashboardApi.EducationProgressServiceUrl")]
+		[YamlProperty("WalletApiEducation.EducationProgressServiceUrl")]
 		public string EducationProgressServiceUrl { get; set; }
 
-		[YamlProperty("DashboardApi.UserRewardServiceUrl")]
+		[YamlProperty("WalletApiEducation.UserRewardServiceUrl")]
 		public string UserRewardServiceUrl { get; set; }
 
-		[YamlProperty("DashboardApi.UserProgressServiceUrl")]
+		[YamlProperty("WalletApiEducation.UserProgressServiceUrl")]
 		public string UserProgressServiceUrl { get; set; }
 
-		[YamlProperty("DashboardApi.EducationRetryServiceUrl")]
+		[YamlProperty("WalletApiEducation.EducationRetryServiceUrl")]
 		public string EducationRetryServiceUrl { get; set; }
 	}
 }

@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyJetWallet.Sdk.Authorization.Http;
 using NSwag.Annotations;
+using Service.Core.Client.Extensions;
 using Service.Education.Extensions;
 using Service.Education.Helpers;
 using Service.Education.Structure;
@@ -49,7 +51,7 @@ namespace Service.WalletApi.DashboardApi.Controllers
 		[SwaggerResponse(HttpStatusCode.OK, typeof (DataResponse<TutorialStateResponse>), Description = "Ok")]
 		public async ValueTask<IActionResult> GetTutorialListInfoAsync()
 		{
-			Guid? userId = GetUserId();
+			string userId = this.GetClientId();
 			if (userId == null)
 				return StatusResponse.Error(ResponseCode.UserNotFound);
 
@@ -65,7 +67,7 @@ namespace Service.WalletApi.DashboardApi.Controllers
 		[SwaggerResponse(HttpStatusCode.OK, typeof (DataResponse<TutorialProgressResponse>), Description = "Ok")]
 		public async ValueTask<IActionResult> GetTutorialInfoAsync([FromBody] TutorialInfoRequest request)
 		{
-			Guid? userId = GetUserId();
+			string userId = this.GetClientId();
 			if (userId == null)
 				return StatusResponse.Error(ResponseCode.UserNotFound);
 
@@ -106,7 +108,7 @@ namespace Service.WalletApi.DashboardApi.Controllers
 		[SwaggerResponse(HttpStatusCode.OK, typeof (DataResponse<ProgressResponse>), Description = "Ok")]
 		public async ValueTask<IActionResult> GetProgressAsync()
 		{
-			Guid? userId = GetUserId();
+			string userId = this.GetClientId();
 			if (userId == null)
 				return StatusResponse.Error(ResponseCode.UserNotFound);
 
@@ -133,15 +135,6 @@ namespace Service.WalletApi.DashboardApi.Controllers
 			}
 
 			return DataResponse<ProgressResponse>.Ok(result);
-		}
-
-		protected Guid? GetUserId()
-		{
-			string clientId = this.GetClientId();
-			if (clientId.IsNullOrWhiteSpace())
-				return null;
-
-			return Guid.TryParse(clientId, out Guid uid) ? (Guid?)uid : null;
 		}
 	}
 }

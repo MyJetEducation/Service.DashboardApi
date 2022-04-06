@@ -6,6 +6,7 @@ using MyJetWallet.ApiSecurityManager.Autofac;
 using MyJetWallet.Sdk.GrpcSchema;
 using MyJetWallet.Sdk.Service;
 using MyJetWallet.Sdk.WalletApi;
+using Service.Core.Client.Constants;
 using Service.WalletApi.DashboardApi.Modules;
 
 namespace Service.WalletApi.DashboardApi
@@ -16,7 +17,7 @@ namespace Service.WalletApi.DashboardApi
 		{
 			StartupUtils.SetupSimpleServices(services, Program.Settings.SessionEncryptionKeyId);
 			services.AddHttpContextAccessor();
-			services.ConfigureJetWallet<ApplicationLifetimeManager>(Program.Settings.ZipkinUrl);
+			services.ConfigureJetWallet<ApplicationLifetimeManager>(Program.Settings.ZipkinUrl, Configuration.TelemetryPrefix);
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
