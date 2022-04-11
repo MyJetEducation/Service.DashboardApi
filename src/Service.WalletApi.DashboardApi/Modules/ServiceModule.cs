@@ -16,11 +16,9 @@ namespace Service.WalletApi.DashboardApi.Modules
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
-			// second parameter is null because we do not store api keys yet for wallet api
-			builder.RegisterEncryptionServiceClient(ApplicationEnvironment.AppName, () => Program.Settings.MyNoSqlWriterUrl);
+			builder.RegisterEncryptionServiceClient();
 
 			builder.RegisterEducationRetryClient(Program.Settings.EducationRetryServiceUrl, Program.LoggerFactory.CreateLogger(typeof (EducationRetryClientFactory)));
-
 			builder.RegisterEducationProgressClient(Program.Settings.EducationProgressServiceUrl);
 			builder.RegisterUserProgressClient(Program.Settings.UserProgressServiceUrl);
 			builder.RegisterUserRewardClient(Program.Settings.UserRewardServiceUrl);
